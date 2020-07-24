@@ -2,8 +2,8 @@ const express = require("express");
 const dragonRouter = express.Router();
 
 // Controllers
-const { createDragon } = require("./../controllers/dragon-controllers.js");
+const { getNewDragon } = require("../controllers/dragon-controllers.js");
 
-dragonRouter.route("/new").get(createDragon);
+dragonRouter.route("/new").get(getNewDragon);
 
 module.exports = dragonRouter;
