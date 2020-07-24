@@ -1,4 +1,4 @@
-const TRAITS = require("./traits.json");
+const TRAITS = require("../../data/traits.json");
 
 // Scream case is a convention to describe global variables that don't change
 const DEFAULT_PROPERTIES = {

@@ -1,4 +1,4 @@
-const GenerationEngine = require("../generation-engine.js");
+const GenerationEngine = require("../generation/generation-engine.js");
 const engine = new GenerationEngine();
 
 engine.start();
