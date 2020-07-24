@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node ./bin/server.js",
     "server": "nodemon ./bin/server.js",
+    "configure-dev": "npm run configure && npm run server",
     "configure": "./bin/configure_db.sh"
   },
   "keywords": [],
