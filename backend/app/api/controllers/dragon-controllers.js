@@ -1,6 +1,6 @@
 const DragonTable = require("./../../dragon/table.js");
 
-const getNewDragon = async (req, res) => {
+const getNewDragon = async (req, res, next) => {
   // Create new dragon
   const newDragon = req.app.locals.engine.generation.createNewDragon();
 
@@ -9,8 +9,7 @@ const getNewDragon = async (req, res) => {
     const { dragonId } = await DragonTable.storeDragon(newDragon);
     newDragon.dragonId = dragonId;
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ msg: "Couldn't get new dragon!" });
+    next(error);
   }
 
   return res.json({ dragon: newDragon });
