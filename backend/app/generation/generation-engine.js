@@ -1,4 +1,4 @@
-const Generation = require("./generation.js");
+const Generation = require("./index.js");
 const GenerationTable = require("./table.js");
 
 class GenerationEngine {
@@ -15,20 +15,28 @@ class GenerationEngine {
     clearTimeout(this.timer);
   }
 
-  createNewGeneration() {
+  async createNewGeneration() {
     // Creates new generation
-    this.generation = new Generation();
+    const generation = new Generation();
 
-    console.log("new generation", this.generation);
+    try {
+      // Store new generation in db table
+      const { generationId } = await GenerationTable.storeGeneration(
+        generation
+      );
+      this.generation = generation;
+      this.generation.generationId = generationId;
 
-    // Store new generation in db table
-    GenerationTable.storeGeneration(this.generation);
+      console.log("generation...", this.generation);
 
-    // Recursive, create new generation when previous is expired
-    this.timer = setTimeout(
-      () => this.createNewGeneration(),
-      this.generation.expiration.getTime() - Date.now()
-    );
+      // Recursive, create new generation when previous is expired
+      this.timer = setTimeout(
+        () => this.createNewGeneration(),
+        this.generation.expiration.getTime() - Date.now()
+      );
+    } catch (err) {
+      console.error(err);
+    }
   }
 }
 

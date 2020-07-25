@@ -22,13 +22,15 @@ const DEFAULT_PROPERTIES = {
 
     return traits;
   },
+  generationId: undefined,
 };
 
 class Dragon {
-  constructor({ birthday, nickname, traits } = {}) {
+  constructor({ birthday, nickname, traits, generationId } = {}) {
     this.birthday = birthday || DEFAULT_PROPERTIES.birthday;
     this.nickname = nickname || DEFAULT_PROPERTIES.nickname;
     this.traits = traits || DEFAULT_PROPERTIES.randomTraits;
+    this.generationId = generationId || DEFAULT_PROPERTIES.generationId;
   }
 }
 
